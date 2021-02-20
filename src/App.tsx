@@ -36,7 +36,7 @@ function App() {
     const {
       data: { text },
     } = await worker.recognize(src);
-    await worker.terminate();
+    // await worker.terminate();
 
     // const {
     //   data: { text },
@@ -81,29 +81,22 @@ function App() {
       {isLoading ? (
         getLoading()
       ) : (
-        <div onPaste={handleOnPaste}>
+        <div className="main">
           <h1>Paste image and get text</h1>
-
-          {infos.map((info: info, idx: number) => {
-            return (
-              <div
-                key={idx}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-around",
-                  padding: "8px",
-                }}
-              >
-                <div className="images-container">
-                  <img src={info.imgSrc} alt="Pasted information" />
+          <div onPaste={handleOnPaste} className="container">
+            {infos.map((info: info, idx: number) => {
+              return (
+                <div key={idx} className="info-container">
+                  <div className="image-content">
+                    <img src={info.imgSrc} alt="Pasted information" />
+                  </div>
+                  <div className="text-content">
+                    <p>{info.text}</p>
+                  </div>
                 </div>
-                <div className="texts-container">
-                  <p>{info.text}</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
     </>
