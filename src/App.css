@@ -26,7 +26,7 @@
   /* background: #ddd; */
   margin-bottom: 24px;
   padding: 4px;
-  background: linear-gradient(45deg, #0089ff, #00aeff);
+  background: linear-gradient(45deg, #a538ff, #17dbdf);
 }
 
 .text-content {
@@ -37,11 +37,42 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .text-content p {
   font-family: Roboto, sans-serif;
   font-weight: 400;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.text-content span.badge {
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+  opacity: 0;
+  animation: fadeout 1s forwards;
+}
+
+.text-content:hover span.badge {
+  animation: fadein 1s forwards;
 }
 
 .image-content {
@@ -53,4 +84,19 @@
 .image-content img {
   width: 100%;
   transform: scale(1.2);
+}
+
+.copypaste-watermark {
+  margin: 15vh auto;
+}
+
+.copypaste-watermark svg {
+  width: 30vw;
+  max-width: 300px;
+  fill: #777;
+}
+
+.copypaste-watermark p {
+  font-size: 2.5rem;
+  color: #555;
 }

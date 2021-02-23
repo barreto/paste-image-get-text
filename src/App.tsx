@@ -3,6 +3,9 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
+import { ReactComponent as CopyIcon } from './assets/icons/copy.svg';
+import Badge from './components/Badge';
+
 type info = { imgSrc: string; text: string };
 
 function App() {
@@ -92,11 +95,31 @@ function App() {
                   </div>
                   <div className="text-content">
                     <p>{info.text}</p>
+                    <Badge text="copy" pressedText="copied" />
                   </div>
                 </div>
               );
             })}
+
+            {!Boolean(infos && infos.length) && (
+              <div className="copypaste-watermark">
+                <CopyIcon />
+                <p>Ctrl + V</p>
+              </div>
+            )}
           </div>
+          <footer>
+            <div>
+              Icons made by{" "}
+              <a href="https://www.freepik.com" title="Freepik">
+                Freepik
+              </a>{" "}
+              from{" "}
+              <a href="https://www.flaticon.com/" title="Flaticon">
+                www.flaticon.com
+              </a>
+            </div>
+          </footer>
         </div>
       )}
     </>
