@@ -60,6 +60,10 @@ function App() {
     setInfos(newInfos);
   };
 
+  const handleBadgeClick = (text: string) => {
+    navigator.clipboard.writeText(text);
+  };
+
   //=========================
   useEffect(() => {
     initWorker();
@@ -94,8 +98,12 @@ function App() {
                     <img src={info.imgSrc} alt="Pasted information" />
                   </div>
                   <div className="text-content">
-                    <p>{info.text}</p>
-                    <Badge text="copy" pressedText="copied" />
+                    <pre>{info.text}</pre>
+                    <Badge
+                      text="copy"
+                      pressedText="copied"
+                      onClick={() => handleBadgeClick(info.text)}
+                    />
                   </div>
                 </div>
               );
