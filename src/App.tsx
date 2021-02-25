@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
 import { ReactComponent as CopyIcon } from './assets/icons/copy.svg';
-import Badge from './components/Badge';
+import ParstedContainer from './components/PastedContainer';
 
 type info = { imgSrc: string; text: string };
 
@@ -60,10 +60,6 @@ function App() {
     setInfos(newInfos);
   };
 
-  const handleBadgeClick = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
-
   //=========================
   useEffect(() => {
     initWorker();
@@ -92,21 +88,7 @@ function App() {
           <h1>Paste image and get text</h1>
           <div onPaste={handleOnPaste} className="container">
             {infos.map((info: info, idx: number) => {
-              return (
-                <div key={idx} className="info-container">
-                  <div className="image-content">
-                    <img src={info.imgSrc} alt="Pasted information" />
-                  </div>
-                  <div className="text-content">
-                    <pre>{info.text}</pre>
-                    <Badge
-                      text="copy"
-                      pressedText="copied"
-                      onClick={() => handleBadgeClick(info.text)}
-                    />
-                  </div>
-                </div>
-              );
+              return <ParstedContainer imgSrc={info.imgSrc} text={info.text} />;
             })}
 
             {!Boolean(infos && infos.length) && (
