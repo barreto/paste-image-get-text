@@ -1,20 +1,25 @@
-.main h1 {
-  font-family: Montserrat, Roboto, sans-serif;
-  font-weight: 400;
+.container header {
   height: 20vh; /* <<<<<<<<<< complementary height */
   color: #777;
   background: #f7f7f7;
   margin-top: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.container {
+.container header h1 {
+  font-family: Montserrat, Roboto, sans-serif;
+  font-weight: 400;
+}
+
+.container main {
   text-align: center;
   max-width: 90vw;
   margin: 0 auto;
-  min-height: 80vh; /* <<<<<<<<<< complementary height*/
+  /*min-height: 80vh;  <<<<<<<<<< complementary height*/
+  margin-top: 1rem;
 }
 
 .info-container {
@@ -33,66 +38,9 @@
   animation: fadein 1s forwards;
 }
 
-.text-content {
-  flex-grow: 1;
-  background: #eee;
-  padding: 16px 24px;
-  border-radius: 0 10px 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.text-content pre {
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
-  text-align: left;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-.text-content span.badge {
-  position: absolute;
-  right: 16px;
-  bottom: 8px;
-  opacity: 0;
-  animation: fadeout 1s forwards;
-}
-
-.text-content:hover span.badge {
-  animation: fadein 1s forwards;
-}
-
-.image-content {
-  flex-grow: 1;
-  overflow: hidden;
-  border-radius: 10px 0 0 10px;
-}
-
-.image-content img {
-  width: 100%;
-  transform: scale(1.2);
-}
-
 .copypaste-watermark {
-  margin: 15vh auto;
+  margin: 0 auto;
+  padding: 15vh 0;
 }
 
 .copypaste-watermark svg {

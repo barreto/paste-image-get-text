@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
 import { ReactComponent as CopyIcon } from './assets/icons/copy.svg';
-import ParstedContainer from './components/PastedContainer';
+import Loading from './components/Loading';
+import ParstedItem from './components/PastedContainer';
 
 type info = { imgSrc: string; text: string };
 
 function App() {
   const [infos, setInfos] = useState<info[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [worker, setWorker] = useState(createWorker());
 
   const handleOnPaste = async (event: any) => {
@@ -60,35 +61,37 @@ function App() {
     setInfos(newInfos);
   };
 
-  //=========================
+  const removeInfo = (imgSrc: string) => {
+    const newInfos = [...infos];
+    const indexOfSrc = newInfos.findIndex((info) => info.imgSrc === imgSrc);
+    newInfos.splice(indexOfSrc, 1);
+    setInfos(newInfos);
+  };
+
   useEffect(() => {
     initWorker();
+    setInfos([]);
   }, []);
-
-  function getLoading() {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        Loading ...
-      </div>
-    );
-  }
 
   return (
     <>
       {isLoading ? (
-        getLoading()
+        <Loading />
       ) : (
-        <div className="main">
-          <h1>Paste image and get text</h1>
-          <div onPaste={handleOnPaste} className="container">
+        <div className="container" onPaste={handleOnPaste}>
+          <header>
+            <h1>Paste image and get text</h1>
+          </header>
+          <main className="container">
             {infos.map((info: info, idx: number) => {
-              return <ParstedContainer imgSrc={info.imgSrc} text={info.text} />;
+              return (
+                <ParstedItem
+                  key={idx}
+                  imgSrc={info.imgSrc}
+                  text={info.text}
+                  onClose={() => removeInfo(info.imgSrc)}
+                />
+              );
             })}
 
             {!Boolean(infos && infos.length) && (
@@ -97,19 +100,7 @@ function App() {
                 <p>Ctrl + V</p>
               </div>
             )}
-          </div>
-          <footer>
-            <div>
-              Icons made by{" "}
-              <a href="https://www.freepik.com" title="Freepik">
-                Freepik
-              </a>{" "}
-              from{" "}
-              <a href="https://www.flaticon.com/" title="Flaticon">
-                www.flaticon.com
-              </a>
-            </div>
-          </footer>
+          </main>
         </div>
       )}
     </>

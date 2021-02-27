@@ -1,0 +1,50 @@
+.container-loading {
+  height: 100vh;
+  width: 100vw;
+  padding-bottom: 10vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: 1.25rem;
+}
+
+@keyframes progressAnimation {
+  0% {
+    background-position: -50px;
+  }
+  50% {
+    background-position: 50px;
+  }
+  100% {
+    background-position: -50px;
+  }
+}
+
+.container-loading .progress {
+  height: 8px;
+  width: 12rem;
+
+  position: relative;
+  border-radius: 10px;
+  transition: 1s;
+
+  overflow: hidden;
+  /* border: 1px solid red; */
+}
+
+.inner-progress {
+  height: 40px;
+  width: 18rem;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: linear-gradient(45deg, #a538ff 0%, #17dbdf 100%);
+  animation: progressAnimation 2s ease-in 0s infinite;
+
+  /* border: 1px solid #333; */
+}
