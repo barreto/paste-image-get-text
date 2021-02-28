@@ -6,26 +6,37 @@ import { createWorker } from 'tesseract.js';
 import { ReactComponent as CopyIcon } from './assets/icons/copy.svg';
 import Loading from './components/Loading';
 import ParstedItem from './components/PastedContainer';
-
-type info = { imgSrc: string; text: string };
+import useKeyPress from './utils/useKeyPress';
 
 function App() {
+  type info = { imgSrc: string; text: string };
+
+  const delayToApreciateKeysAnimation = 300;
+
   const [infos, setInfos] = useState<info[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [worker, setWorker] = useState(createWorker());
+  const controlPress = useKeyPress("Control");
+  const vPress = useKeyPress("v");
+
   const showWaterMark = !Boolean(infos && infos.length);
 
   const handleOnPaste = async (event: any) => {
     event.preventDefault();
     event.stopPropagation();
 
-    let file = event.clipboardData.items[0].getAsFile();
-    if (file) {
+    const clipboardData = event.clipboardData;
+
+    if (clipboardData.items && clipboardData.items[0]?.getAsFile()) {
+      console.log("Test II");
+      let file = event.clipboardData.items[0].getAsFile();
       let objectUrl = URL.createObjectURL(file);
 
-      setInfos([...infos, { imgSrc: objectUrl, text: "Loading..." }]);
-
-      doOCR(objectUrl);
+      setTimeout(() => {
+        console.log("Test", clipboardData.items);
+        setInfos([...infos, { imgSrc: objectUrl, text: "Loading..." }]);
+        doOCR(objectUrl);
+      }, delayToApreciateKeysAnimation);
     }
   };
 
@@ -100,7 +111,11 @@ function App() {
             {showWaterMark && (
               <div className="copypaste-watermark">
                 <CopyIcon />
-                <p>Ctrl + V</p>
+                <p>
+                  <span className={`key ${controlPress ? "pressed-key" : ""}`}>Ctrl</span>
+                  <span> + </span>
+                  <span className={`key ${vPress ? "pressed-key" : ""}`}>V</span>
+                </p>
               </div>
             )}
           </main>
