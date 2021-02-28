@@ -16,27 +16,9 @@
   text-align: left;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 .text-content span.badge {
   position: absolute;
-  right: 16px;
+  right: 8px;
   bottom: 8px;
   opacity: 0;
   animation: fadeout 1s forwards;
@@ -55,6 +37,7 @@
   background: linear-gradient(45deg, #1dd3e0, #17dbdf);
   border-bottom-left-radius: 10px;
 }
+
 .btn-close svg {
   min-height: 2rem;
   min-width: 2rem;
@@ -70,9 +53,26 @@
   flex-grow: 1;
   overflow: hidden;
   border-radius: 10px 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .image-content img {
-  width: 100%;
-  transform: scale(1.2);
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.image-content span.badge {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+
+  opacity: 0;
+  animation: fadeout 1s forwards;
+}
+
+.image-content:hover span.badge {
+  animation: fadein 1s forwards;
 }

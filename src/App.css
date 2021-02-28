@@ -31,6 +31,7 @@
   /* background: #ddd; */
   margin-bottom: 24px;
   padding: 4px;
+  transition: 500ms;
   background: linear-gradient(45deg, #a538ff, #17dbdf);
 }
 
@@ -41,6 +42,8 @@
 .copypaste-watermark {
   margin: 0 auto;
   padding: 15vh 0;
+  opacity: 0;
+  animation: fadein 1s forwards;
 }
 
 .copypaste-watermark svg {

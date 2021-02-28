@@ -13,17 +13,20 @@ function App() {
   const [infos, setInfos] = useState<info[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [worker, setWorker] = useState(createWorker());
+  const showWaterMark = !Boolean(infos && infos.length);
 
   const handleOnPaste = async (event: any) => {
     event.preventDefault();
     event.stopPropagation();
 
     let file = event.clipboardData.items[0].getAsFile();
-    let objectUrl = URL.createObjectURL(file);
+    if (file) {
+      let objectUrl = URL.createObjectURL(file);
 
-    setInfos([...infos, { imgSrc: objectUrl, text: "Loading..." }]);
+      setInfos([...infos, { imgSrc: objectUrl, text: "Loading..." }]);
 
-    doOCR(objectUrl);
+      doOCR(objectUrl);
+    }
   };
 
   const initWorker = async () => {
@@ -94,13 +97,26 @@ function App() {
               );
             })}
 
-            {!Boolean(infos && infos.length) && (
+            {showWaterMark && (
               <div className="copypaste-watermark">
                 <CopyIcon />
                 <p>Ctrl + V</p>
               </div>
             )}
           </main>
+
+          {/* <footer>
+            <div>
+              Icons made by{" "}
+              <a href="https://www.freepik.com" title="Freepik">
+                Freepik
+              </a>{" "}
+              from{" "}
+              <a href="https://www.flaticon.com/" title="Flaticon">
+                www.flaticon.com
+              </a>
+            </div>
+          </footer> */}
         </div>
       )}
     </>

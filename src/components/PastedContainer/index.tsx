@@ -16,10 +16,18 @@ const ParstedItem: React.FC<PastedContainerProps> = ({ imgSrc, text, onClose }) 
     navigator.clipboard.writeText(text);
   };
 
+  const downloadImage = () => {
+    console.log(">>> downloadImage: ", imgSrc);
+  };
+
   return (
     <div className="info-container">
       <div className="image-content">
         <img src={imgSrc} alt="Pasted information" />
+
+        {/* <Badge text="dowload" pressedText="dowloading" onClick={downloadImage}>
+          <DownloadImg />
+        </Badge> */}
       </div>
       <div className="text-content">
         <pre>{text}</pre>
