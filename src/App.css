@@ -19,8 +19,7 @@
   text-align: center;
   max-width: 90vw;
   margin: 0 auto;
-  /*min-height: 80vh;  <<<<<<<<<< complementary height*/
-  margin-top: 1rem;
+  padding-top: 1rem;
 }
 
 .info-container {
@@ -40,20 +39,27 @@
   animation: fadein 1s forwards;
 }
 
-.copypaste-watermark {
+.paste-watermark-container {
+  min-height: 77vh; /* <<<<<<<<<< complementary height */
+
   margin: 0 auto;
-  padding: 15vh 0;
+  padding: 0;
   opacity: 0;
   animation: fadein 1s forwards;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.copypaste-watermark svg {
+.paste-watermark-container svg {
   width: 30vw;
   max-width: 300px;
   fill: #777;
 }
 
-.copypaste-watermark p {
+.paste-watermark-container p {
   font-size: 2.5rem;
   color: #555;
 }

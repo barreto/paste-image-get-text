@@ -97,25 +97,27 @@ function App() {
             <h1>Paste image and get text</h1>
           </header>
           <main className="container">
-            {infos.map((info: info, idx: number) => {
-              return (
-                <ParstedItem
-                  key={idx}
-                  imgSrc={info.imgSrc}
-                  text={info.text}
-                  onClose={() => removeInfo(info.imgSrc)}
-                />
-              );
-            })}
-
-            {showWaterMark && (
-              <div className="copypaste-watermark">
+            {showWaterMark ? (
+              <div className="paste-watermark-container">
                 <CopyIcon />
                 <p>
                   <span className={`key ${controlPress ? "pressed-key" : ""}`}>Ctrl</span>
                   <span> + </span>
                   <span className={`key ${vPress ? "pressed-key" : ""}`}>V</span>
                 </p>
+              </div>
+            ) : (
+              <div className="pasted-items-container">
+                {infos.map((info: info, idx: number) => {
+                  return (
+                    <ParstedItem
+                      key={idx}
+                      imgSrc={info.imgSrc}
+                      text={info.text}
+                      onClose={() => removeInfo(info.imgSrc)}
+                    />
+                  );
+                })}
               </div>
             )}
           </main>
